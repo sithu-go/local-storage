@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package filegrpc;
+
+option go_package = "./filegrpc";
+
+// Image GRPC
+message imageCreateRequest {
+    bytes fileData = 1;
+    string ext = 2;
+}
+
+message imageResponse {
+    string filename = 1;
+}
+
+message imageGetRequest {
+    string filename = 1;
+}
+message imageGetResponse {
+    bytes fileData = 1;
+    string ext = 2;
+}
+
+message imageDeleteRequest {
+    string filename = 1;
+}
+
+message imageDeleteResponse {
+    bool deleted = 1;
+}
+
+// Video GRPC
+message vidoeCreateRequest {
+    bytes fileData = 1;
+    string ext = 2;
+}
+
+message videoCreateResponse {
+    string filename = 1;
+}
+
+message videoGetRequest {
+    string filename = 1;
+}
+message videoGetResponse {
+    bytes fileData = 1;
+    string ext = 2;
+}
+
+message videoDeleteRequest {
+    string filename = 1;
+}
+
+message videoDeleteResponse {
+    bool deleted = 1;
+}
+
+service file {
+    // image grpc call
+    rpc createImage(imageCreateRequest) returns (imageResponse);
+    rpc getImage(imageGetRequest) returns (imageGetResponse);
+    rpc deleteImage(imageDeleteRequest) returns (imageDeleteResponse);
+
+    // video grpc call
+    rpc createvideo(vidoeCreateRequest) returns (videoCreateResponse);
+    rpc getvideo(videoGetRequest) returns (videoGetResponse);
+    rpc deletevideo(videoDeleteRequest) returns (videoDeleteResponse);
+}
